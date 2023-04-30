@@ -46,7 +46,7 @@ include "../includes/conect.php" ;
           <p class="text-light text-center">Имя Админа</p>
         </div>
         <div class="button text-center">
-          <button class="my-btn"><a href="#" class="nav-link text-light bg-info my-1">Добавить товар</a></button>
+          <button class="my-btn"><a href="insert_product.php" class="nav-link text-light bg-info my-1">Добавить товар</a></button>
           <button class="my-btn"><a href="#" class="nav-link text-light bg-info my-1">Смотреть товар</a></button>
           <button class="my-btn"><a href="index.php?insert_categories" class="nav-link text-light bg-info my-1">Добавить категорию</a></button>
           <button class="my-btn"><a href="#" class="nav-link text-light bg-info my-1">Смотреть категорию</a></button>

@@ -84,6 +84,38 @@ include 'includes/conect.php';
       <div class="col-md-10">
         <!-- продукты -->
         <div class="row">
+          <?php
+          $select_product = "SELECT `product_id`, `product_title`, `product_description`, `product_keywords`, `category_id`, `brand_id`, `img_1`, `img_2`, `img_3`, `product_price`, `date`, `product_status` FROM `product`";
+          $sql_query = mysqli_query($con,$select_product);
+          while($result = mysqli_fetch_assoc($sql_query)){
+            $product_id = $result["product_id"];
+            $product_title = $result["product_title"];
+            $product_description = $result["product_description"];
+            $product_keywords = $result["product_keywords"];
+            $category_id = $result["category_id"];
+            $brand_id = $result["brand_id"];
+            $img_1 = $result["img_1"];
+            $img_2 = $result["img_2"];
+            $img_3 = $result["img_3"];
+            $dt = $result["date"];
+            $status = $result["product_status"];
+            ?>
+              <div class="col-md-4 mb-2">
+            <div class="card">
+              <img src="admin/product_images/<?=$img_1?>" class="card-img-top" alt="foto">
+              <div class="card-body">
+                <h5 class="card-title"><?=$product_title?></h5>
+                <p class="card-text"><?=$product_title?></p>
+                <a href="#" class="btn btn-info">В корзину</a>
+                <a href="#" class="btn btn-secondary">Смотреть еще</a>
+              </div>
+            </div>
+          </div>
+            
+            <?
+          }
+          ?>
+          
           <div class="col-md-4 mb-2">
             <div class="card">
               <img src="img/olympus.jpg" class="card-img-top" alt="foto">

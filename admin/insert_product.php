@@ -18,18 +18,26 @@ if (isset($_POST['insert_product'])) {
   $temp_img_2 = $_FILES['product_img_2']['tmp_name'];
   $temp_img_3 = $_FILES['product_img_3']['tmp_name'];
 
-  move_uploaded_file($temp_img_1, "product_images/$product_img_1");
-  move_uploaded_file($temp_img_2, "product_images/$product_img_2");
-  move_uploaded_file($temp_img_3, "product_images/$product_img_3");
+  // move_uploaded_file($temp_img_1, "product_images/$product_img_1");
+  // move_uploaded_file($temp_img_2, "product_images/$product_img_2");
+  // move_uploaded_file($temp_img_3, "product_images/$product_img_3");
 
   // проверка полей ------------------
-  if (!$product_title or !$product_description or !$product_keywords or !$product_category or !$product_brand or !$product_price or !$product_img_1 or !$product_img_2 or !$product_img_3) {
+  if ($product_title=='' or $product_description=='' or $product_keywords=='' or $product_category=='' or $product_brand=='' or $product_price=='' or $product_img_1=='' or $product_img_2=='' or $product_img_3=='') {
     echo"<script> alert('Заполните все поля')</script>";
   // проверка полей ------------------
 
   }else{
     $sql = "INSERT INTO `product`( product_title,product_description,product_keywords,category_id,brand_id,img_1,img_2,img_3,product_price,date,product_status) VALUES ('$product_title','$product_description','$product_keywords','$product_category','$product_brand','$product_img_1','$product_img_2','$product_img_3','$product_price',NOW(),$status)";
-    mysqli_query($con, $sql);
+
+    move_uploaded_file($temp_img_1, "product_images/$product_img_1");
+    move_uploaded_file($temp_img_2, "product_images/$product_img_2");
+    move_uploaded_file($temp_img_3, "product_images/$product_img_3");
+
+    $result_query = mysqli_query($con, $sql);
+    if($result_query){
+    echo"<script> alert('Товар успешно добавлен в базу')</script>";
+    }
   }
 
 }
@@ -116,6 +124,7 @@ if (isset($_POST['insert_product'])) {
 
 
       </form>
+      <a class="btn btn-primary " href="index.php" role="button">В Админку</a>
 
     </div>
   </div>
