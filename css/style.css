@@ -19,3 +19,7 @@
 .my-btn{
   margin: 0.8rem;
 }
+.danger{
+  text-align: center;
+  color:red;
+}

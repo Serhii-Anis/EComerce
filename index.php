@@ -1,5 +1,5 @@
 <?php
-include 'includes/conect.php';
+include 'fnctions/common_function.php';
 ?>
 <!DOCTYPE html>
 <html lang="ru">
@@ -85,103 +85,10 @@ include 'includes/conect.php';
         <!-- продукты -->
         <div class="row">
           <?php
-          $select_product = "SELECT `product_id`, `product_title`, `product_description`, `product_keywords`, `category_id`, `brand_id`, `img_1`, `img_2`, `img_3`, `product_price`, `date`, `product_status` FROM `product`";
-          $sql_query = mysqli_query($con,$select_product);
-          while($result = mysqli_fetch_assoc($sql_query)){
-            $product_id = $result["product_id"];
-            $product_title = $result["product_title"];
-            $product_description = $result["product_description"];
-            $product_keywords = $result["product_keywords"];
-            $category_id = $result["category_id"];
-            $brand_id = $result["brand_id"];
-            $img_1 = $result["img_1"];
-            $img_2 = $result["img_2"];
-            $img_3 = $result["img_3"];
-            $dt = $result["date"];
-            $status = $result["product_status"];
-            ?>
-              <div class="col-md-4 mb-2">
-            <div class="card">
-              <img src="admin/product_images/<?=$img_1?>" class="card-img-top" alt="foto">
-              <div class="card-body">
-                <h5 class="card-title"><?=$product_title?></h5>
-                <p class="card-text"><?=$product_title?></p>
-                <a href="#" class="btn btn-info">В корзину</a>
-                <a href="#" class="btn btn-secondary">Смотреть еще</a>
-              </div>
-            </div>
-          </div>
-            
-            <?
-          }
+          getProducts();
+          getUniqueCategory();
+          getUniqueBrand();
           ?>
-          
-          <div class="col-md-4 mb-2">
-            <div class="card">
-              <img src="img/olympus.jpg" class="card-img-top" alt="foto">
-              <div class="card-body">
-                <h5 class="card-title">Название</h5>
-                <p class="card-text">Описание товара и его приемущества</p>
-                <a href="#" class="btn btn-info">В корзину</a>
-                <a href="#" class="btn btn-secondary">Смотреть еще</a>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-4 mb-2">
-            <div class="card">
-              <img src="img/hmt.JPG" class="card-img-top" alt="foto">
-              <div class="card-body">
-                <h5 class="card-title">Название</h5>
-                <p class="card-text">Описание товара и его приемущества</p>
-                <a href="#" class="btn btn-info">В корзину</a>
-                <a href="#" class="btn btn-secondary">Смотреть еще</a>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-4 mb-2">
-            <div class="card">
-              <img src="img/HXR.jpg" class="card-img-top" alt="foto">
-              <div class="card-body">
-                <h5 class="card-title">Название</h5>
-                <p class="card-text">Описание товара и его приемущества</p>
-                <a href="#" class="btn btn-info">В корзину</a>
-                <a href="#" class="btn btn-secondary">Смотреть еще</a>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-4 mb-2">
-            <div class="card">
-              <img src="img/HXR.jpg" class="card-img-top" alt="foto">
-              <div class="card-body">
-                <h5 class="card-title">Название</h5>
-                <p class="card-text">Описание товара и его приемущества</p>
-                <a href="#" class="btn btn-info">В корзину</a>
-                <a href="#" class="btn btn-secondary">Смотреть еще</a>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-4 mb-2">
-            <div class="card">
-              <img src="img/cover.jpg" class="card-img-top" alt="foto">
-              <div class="card-body">
-                <h5 class="card-title">Название</h5>
-                <p class="card-text">Описание товара и его приемущества</p>
-                <a href="#" class="btn btn-info">В корзину</a>
-                <a href="#" class="btn btn-secondary">Смотреть еще</a>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-4 mb-2">
-            <div class="card">
-              <img src="img/HXR.jpg" class="card-img-top" alt="foto">
-              <div class="card-body">
-                <h5 class="card-title">Название</h5>
-                <p class="card-text">Описание товара и его приемущества</p>
-                <a href="#" class="btn btn-info">В корзину</a>
-                <a href="#" class="btn btn-secondary">Смотреть еще</a>
-              </div>
-            </div>
-          </div>
         </div>
         <!-- продукты -->
       </div>
@@ -195,17 +102,8 @@ include 'includes/conect.php';
             </a>
           </li>
           <?php
-          $select_brands = "SELECT brand_id,brand_title FROM `brand`";
-          $result_brands = mysqli_query($con, $select_brands);
-          while ($row_data = mysqli_fetch_assoc($result_brands)) {
-            $brand_title = $row_data['brand_title'];
-            $brand_id = $row_data['brand_id'];
+          getBrands();
           ?>
-            <li class="nav-item ">
-              <a href="index.php?brand=<?=$brand_id?>" class="nav-link text-light"><?= $brand_title ?></a>
-            </li>
-          <?
-          }?>
         </ul>
         <!-- Показ бренда -->
         <!-- Показ категории -->
@@ -216,23 +114,13 @@ include 'includes/conect.php';
             </a>
           </li>
           <?php
-          $select_categories = "SELECT category_id,category_title FROM `categories`";
-          $result_categories = mysqli_query($con, $select_categories);
-          while ($row_data = mysqli_fetch_assoc($result_categories)) {
-            $category_title = $row_data['category_title'];
-            $category_id = $row_data['category_id'];
+          getCategories();
           ?>
-            <li class="nav-item ">
-              <a href="index.php?category=<?=$category_id?>" class="nav-link text-light"><?= $category_title ?></a>
-            </li>
-          <?
-          }?>
         </ul>
         <!-- Показ категории -->
         <!-- сайд бар -->
       </div>
       <!-- секция третья -->
-
 
       <!-- footer content -->
       <div class="container-fluid p-0 bg-info mt-1">
