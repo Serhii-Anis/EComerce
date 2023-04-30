@@ -1,3 +1,6 @@
+<?php
+include 'includes/conect.php';
+?>
 <!DOCTYPE html>
 <html lang="ru">
 
@@ -152,8 +155,48 @@
       </div>
       <div class="col-md-2 bg-secondary p-0">
         <!-- сайд бар -->
-        <h4 class="text-center bg-info">Бренд поставки </h4>
-
+        <!-- Показ бренда -->
+        <ul class="navbar-nav me-auto text-center">
+          <li class="nav-item bg-info">
+            <a href="#" class="nav-link text-light">
+              <h4>Бренды и марки</h4>
+            </a>
+          </li>
+          <?php
+          $select_brands = "SELECT brand_id,brand_title FROM `brand`";
+          $result_brands = mysqli_query($con, $select_brands);
+          while ($row_data = mysqli_fetch_assoc($result_brands)) {
+            $brand_title = $row_data['brand_title'];
+            $brand_id = $row_data['brand_id'];
+          ?>
+            <li class="nav-item ">
+              <a href="index.php?brand=<?=$brand_id?>" class="nav-link text-light"><?= $brand_title ?></a>
+            </li>
+          <?
+          }?>
+        </ul>
+        <!-- Показ бренда -->
+        <!-- Показ категории -->
+        <ul class="navbar-nav me-auto text-center">
+          <li class="nav-item bg-info">
+            <a href="#" class="nav-link text-light">
+              <h4>Категория</h4>
+            </a>
+          </li>
+          <?php
+          $select_categories = "SELECT category_id,category_title FROM `categories`";
+          $result_categories = mysqli_query($con, $select_categories);
+          while ($row_data = mysqli_fetch_assoc($result_categories)) {
+            $category_title = $row_data['category_title'];
+            $category_id = $row_data['category_id'];
+          ?>
+            <li class="nav-item ">
+              <a href="index.php?category=<?=$category_id?>" class="nav-link text-light"><?= $category_title ?></a>
+            </li>
+          <?
+          }?>
+        </ul>
+        <!-- Показ категории -->
         <!-- сайд бар -->
       </div>
       <!-- секция третья -->
@@ -169,7 +212,8 @@
 
 
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 </body>
 
 </html>

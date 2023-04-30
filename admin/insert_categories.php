@@ -1,0 +1,33 @@
+<?php
+if (isset($_POST['insert_cat'])) {
+  $category_title = $_POST['cat_title'];
+  if (!$category_title) {
+    echo "<script>alert('Введите название категории!')</script>";
+  } else {
+    $select_query = "SELECT category_title FROM `categories`WHERE category_title=('$category_title')";
+    $result_select = mysqli_query($con, $select_query);
+    $number = mysqli_num_rows($result_select);
+    if ($number > 0) {
+      echo "<script>alert('Категория уже существует!')</script>";
+    } else {
+      $insert_query = "INSERT INTO `categories`(category_title)VALUE('$category_title')";
+      $result = mysqli_query($con, $insert_query);
+      if ($result) {
+        echo "<script>alert('Категория успешно добавлена')</script>";
+      }
+    }
+  }
+}
+?>
+<h1 class="text-center mb-3">Добавить категорию товара</h1>
+<form action="" method="post" class="mb-2">
+  <div class="input-group mb-2 align-items-center mt-1">
+    <span>
+      <i class=" bg-info input-group-text fa-solid fa-receipt " id="basic-addon1"></i>
+    </span>
+    <input type="text" class="form-control p-0" name="cat_title" placeholder="добавить категорию" aria-label="add_category" aria-describedby="basic-addon1">
+  </div>
+  <div class="input-grup mb-2 m-auto ">
+    <input type="submit" class="bg-info border-0 p-2 my-3" name="insert_cat" value="Добавить категорию" aria-label="add_category" aria-describedby="basic-addon1">
+  </div>
+</form>

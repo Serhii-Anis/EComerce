@@ -11,3 +11,11 @@
   height: 244px;
   object-fit:contain;
 }
+.avatar{
+  width:100px;
+  object-fit:contain;
+
+}
+.my-btn{
+  margin: 0.8rem;
+}
