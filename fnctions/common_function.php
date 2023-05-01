@@ -6,40 +6,40 @@ include 'includes/conect.php';
 
 function getProducts()
 {
-  global $con;
   // проверяем выбрана ли  категория или бренд 
-  if(!isset($_GET['category'])){
-  if(!isset($_GET['brand'])){
-    $select_product = "SELECT `product_id`, `product_title`, `product_description`, `product_keywords`, `category_id`, `brand_id`, `img_1`, `img_2`, `img_3`, `product_price`, `date`, `product_status` FROM `product` ORDER BY rand() LIMIT 0,9";
-    $sql_query = mysqli_query($con, $select_product);
-    while ($result = mysqli_fetch_assoc($sql_query)) {
-      $product_id = $result["product_id"];
-      $product_title = $result["product_title"];
-      $product_description = $result["product_description"];
-      $product_keywords = $result["product_keywords"];
-      $category_id = $result["category_id"];
-      $brand_id = $result["brand_id"];
-      $img_1 = $result["img_1"];
-      $img_2 = $result["img_2"];
-      $img_3 = $result["img_3"];
-      $dt = $result["date"];
-      $status = $result["product_status"];
-  ?>
-      <div class="col-md-4 mb-2">
-        <div class="card">
-          <img src="admin/product_images/<?= $img_1 ?>" class="card-img-top" alt="foto">
-          <div class="card-body">
-            <h5 class="card-title"><?= $product_title ?></h5>
-            <p class="card-text"><?= $product_title ?></p>
-            <p class="card-text"><?= $product_description ?></p>
-            <a href="#" class="btn btn-info">В корзину</a>
-            <a href="#" class="btn btn-secondary">Смотреть еще</a>
+  if (!isset($_GET['category'])) {
+    if (!isset($_GET['brand'])) {
+      global $con;
+      $select_product = "SELECT `product_id`, `product_title`, `product_description`, `product_keywords`, `category_id`, `brand_id`, `img_1`, `img_2`, `img_3`, `product_price`, `date`, `product_status` FROM `product` ORDER BY rand() LIMIT 0,9";
+      $sql_query = mysqli_query($con, $select_product);
+      while ($result = mysqli_fetch_assoc($sql_query)) {
+        $product_id = $result["product_id"];
+        $product_title = $result["product_title"];
+        $product_description = $result["product_description"];
+        $product_keywords = $result["product_keywords"];
+        $category_id = $result["category_id"];
+        $brand_id = $result["brand_id"];
+        $img_1 = $result["img_1"];
+        $img_2 = $result["img_2"];
+        $img_3 = $result["img_3"];
+        $dt = $result["date"];
+        $status = $result["product_status"];
+?>
+        <div class="col-md-4 mb-2">
+          <div class="card">
+            <img src="admin/product_images/<?= $img_1 ?>" class="card-img-top" alt="foto">
+            <div class="card-body">
+              <h5 class="card-title"><?= $product_title ?></h5>
+              <p class="card-text"><?= $product_title ?></p>
+              <p class="card-text"><?= $product_description ?></p>
+              <a href="index.php?add_to_cart=<?= $product_id ?>" class="btn btn-info">В корзину</a>
+              <a href="product_detail.php?product_id=<?= $product_id ?>" class="btn btn-secondary">Смотреть еще</a>
+            </div>
           </div>
         </div>
-      </div>
     <?
+      }
     }
-  }
   }
 }
 
@@ -53,7 +53,7 @@ function getBrands()
   while ($row_data = mysqli_fetch_assoc($result_brands)) {
     $brand_title = $row_data['brand_title'];
     $brand_id = $row_data['brand_id'];
-  ?>
+    ?>
     <li class="nav-item ">
       <a href="index.php?brand=<?= $brand_id ?>" class="nav-link text-light"><?= $brand_title ?></a>
     </li>
@@ -77,105 +77,105 @@ function getCategories()
     <li class="nav-item ">
       <a href="index.php?category=<?= $category_id ?>" class="nav-link text-light"><?= $category_title ?></a>
     </li>
-<?
+    <?
   }
 }
 
 //getting  unique Categories
-function getUniqueCategory(){
-  {
+function getUniqueCategory()
+{
+  // проверяем выбрана ли  категория или бренд 
+  if (isset($_GET['category'])) {
     global $con;
-    // проверяем выбрана ли  категория или бренд 
-    if(isset($_GET['category'])){
-      $category_id = $_GET['category'];
-      $select_product = "SELECT `product_id`, `product_title`, `product_description`, `product_keywords`, `category_id`, `brand_id`, `img_1`, `img_2`, `img_3`, `product_price`, `date`, `product_status` FROM `product` WHERE category_id=$category_id";
-      $sql_query = mysqli_query($con, $select_product);
-      $num_rows = mysqli_num_rows($sql_query);
-      if($num_rows == 0){
-        echo "<h1 class='danger'> Нет такой категории товара в нашем магазине!</h1>";
-      }
-      while ($result = mysqli_fetch_assoc($sql_query)) {
-        $product_id = $result["product_id"];
-        $product_title = $result["product_title"];
-        $product_description = $result["product_description"];
-        $product_keywords = $result["product_keywords"];
-        $category_id = $result["category_id"];
-        $brand_id = $result["brand_id"];
-        $img_1 = $result["img_1"];
-        $img_2 = $result["img_2"];
-        $img_3 = $result["img_3"];
-        $dt = $result["date"];
-        $status = $result["product_status"];
+    $category_id = $_GET['category'];
+    $select_product = "SELECT `product_id`, `product_title`, `product_description`, `product_keywords`, `category_id`, `brand_id`, `img_1`, `img_2`, `img_3`, `product_price`, `date`, `product_status` FROM `product` WHERE category_id=$category_id";
+    $sql_query = mysqli_query($con, $select_product);
+    $num_rows = mysqli_num_rows($sql_query);
+    if ($num_rows == 0) {
+      echo "<h1 class='danger'> Нет такой категории товара в нашем магазине!</h1>";
+    }
+    while ($result = mysqli_fetch_assoc($sql_query)) {
+      $product_id = $result["product_id"];
+      $product_title = $result["product_title"];
+      $product_description = $result["product_description"];
+      $product_keywords = $result["product_keywords"];
+      $category_id = $result["category_id"];
+      $brand_id = $result["brand_id"];
+      $img_1 = $result["img_1"];
+      $img_2 = $result["img_2"];
+      $img_3 = $result["img_3"];
+      $dt = $result["date"];
+      $status = $result["product_status"];
     ?>
-        <div class="col-md-4 mb-2">
-          <div class="card">
-            <img src="admin/product_images/<?= $img_1 ?>" class="card-img-top" alt="foto">
-            <div class="card-body">
-              <h5 class="card-title"><?= $product_title ?></h5>
-              <p class="card-text"><?= $product_title ?></p>
-              <p class="card-text"><?= $product_description ?></p>
-              <a href="#" class="btn btn-info">В корзину</a>
-              <a href="#" class="btn btn-secondary">Смотреть еще</a>
-            </div>
+      <div class="col-md-4 mb-2">
+        <div class="card">
+          <img src="admin/product_images/<?= $img_1 ?>" class="card-img-top" alt="foto">
+          <div class="card-body">
+            <h5 class="card-title"><?= $product_title ?></h5>
+            <p class="card-text"><?= $product_title ?></p>
+            <p class="card-text"><?= $product_description ?></p>
+            <a href="index.php?add_to_cart=<?= $product_id ?>" class="btn btn-info">В корзину</a>
+            <a href="product_detail.php?product_id=<?= $product_id ?>" class="btn btn-secondary">Смотреть еще</a>
           </div>
         </div>
-      <?
-      }
-    }
+      </div>
+    <?
     }
   }
+}
+
 
 
 //getting  unique Brand
-function getUniqueBrand(){
-  {
+function getUniqueBrand()
+{
+  // проверяем выбрана ли  категория или бренд 
+  if (isset($_GET['brand'])) {
     global $con;
-    // проверяем выбрана ли  категория или бренд 
-    if(isset($_GET['brand'])){
-      $brand_id = $_GET['brand'];
-      $select_product = "SELECT `product_id`, `product_title`, `product_description`, `product_keywords`, `category_id`, `brand_id`, `img_1`, `img_2`, `img_3`, `product_price`, `date`, `product_status` FROM `product` WHERE brand_id=$brand_id";
-      $sql_query = mysqli_query($con, $select_product);
-      $num_rows = mysqli_num_rows($sql_query);
-      if($num_rows == 0){
-        echo "<h1 class='danger'> Нет такого бренда в нашем магазине!</h1>";
-      }
-      while ($result = mysqli_fetch_assoc($sql_query)) {
-        $product_id = $result["product_id"];
-        $product_title = $result["product_title"];
-        $product_description = $result["product_description"];
-        $product_keywords = $result["product_keywords"];
-        $category_id = $result["category_id"];
-        $brand_id = $result["brand_id"];
-        $img_1 = $result["img_1"];
-        $img_2 = $result["img_2"];
-        $img_3 = $result["img_3"];
-        $dt = $result["date"];
-        $status = $result["product_status"];
+    $brand_id = $_GET['brand'];
+    $select_product = "SELECT `product_id`, `product_title`, `product_description`, `product_keywords`, `category_id`, `brand_id`, `img_1`, `img_2`, `img_3`, `product_price`, `date`, `product_status` FROM `product` WHERE brand_id=$brand_id";
+    $sql_query = mysqli_query($con, $select_product);
+    $num_rows = mysqli_num_rows($sql_query);
+    if ($num_rows == 0) {
+      echo "<h1 class='danger'> Нет такого бренда в нашем магазине!</h1>";
+    }
+    while ($result = mysqli_fetch_assoc($sql_query)) {
+      $product_id = $result["product_id"];
+      $product_title = $result["product_title"];
+      $product_description = $result["product_description"];
+      $product_keywords = $result["product_keywords"];
+      $category_id = $result["category_id"];
+      $brand_id = $result["brand_id"];
+      $img_1 = $result["img_1"];
+      $img_2 = $result["img_2"];
+      $img_3 = $result["img_3"];
+      $dt = $result["date"];
+      $status = $result["product_status"];
     ?>
-        <div class="col-md-4 mb-2">
-          <div class="card">
-            <img src="admin/product_images/<?= $img_1 ?>" class="card-img-top" alt="foto">
-            <div class="card-body">
-              <h5 class="card-title"><?= $product_title ?></h5>
-              <p class="card-text"><?= $product_title ?></p>
-              <p class="card-text"><?= $product_description ?></p>
-              <a href="#" class="btn btn-info">В корзину</a>
-              <a href="#" class="btn btn-secondary">Смотреть еще</a>
-            </div>
+      <div class="col-md-4 mb-2">
+        <div class="card">
+          <img src="admin/product_images/<?= $img_1 ?>" class="card-img-top" alt="foto">
+          <div class="card-body">
+            <h5 class="card-title"><?= $product_title ?></h5>
+            <p class="card-text"><?= $product_title ?></p>
+            <p class="card-text"><?= $product_description ?></p>
+            <a href="index.php?add_to_cart=<?= $product_id ?>" class="btn btn-info">В корзину</a>
+            <a href="product_detail.php?product_id=<?= $product_id ?>" class="btn btn-secondary">Смотреть еще</a>
           </div>
         </div>
+      </div>
       <?
-      }
-    }
     }
   }
+}
 
-  function getAllProducts()
-  {
-    global $con;
-    // проверяем выбрана ли  категория или бренд 
-    if(!isset($_GET['category'])){
-    if(!isset($_GET['brand'])){
+
+function getAllProducts()
+{
+  // проверяем выбрана ли  категория или бренд 
+  if (!isset($_GET['category'])) {
+    if (!isset($_GET['brand'])) {
+      global $con;
       $select_product = "SELECT `product_id`, `product_title`, `product_description`, `product_keywords`, `category_id`, `brand_id`, `img_1`, `img_2`, `img_3`, `product_price`, `date`, `product_status` FROM `product` ORDER BY rand()";
       $sql_query = mysqli_query($con, $select_product);
       while ($result = mysqli_fetch_assoc($sql_query)) {
@@ -190,7 +190,7 @@ function getUniqueBrand(){
         $img_3 = $result["img_3"];
         $dt = $result["date"];
         $status = $result["product_status"];
-    ?>
+      ?>
         <div class="col-md-4 mb-2">
           <div class="card">
             <img src="admin/product_images/<?= $img_1 ?>" class="card-img-top" alt="foto">
@@ -198,54 +198,184 @@ function getUniqueBrand(){
               <h5 class="card-title"><?= $product_title ?></h5>
               <p class="card-text"><?= $product_title ?></p>
               <p class="card-text"><?= $product_description ?></p>
-              <a href="#" class="btn btn-info">В корзину</a>
-              <a href="#" class="btn btn-secondary">Смотреть еще</a>
+              <a href="index.php?add_to_cart=<?= $product_id ?>" class="btn btn-info">В корзину</a>
+              <a href="product_detail.php?product_id=<?= $product_id ?>" class="btn btn-secondary">Смотреть еще</a>
             </div>
           </div>
         </div>
       <?
       }
-    }
     }
   }
-  
-  // search products
-  function searchProduct(){
+}
+
+// search products
+function searchProduct()
+{
+  if (isset($_GET['search_data_product'])) {
     global $con;
-    if(isset($_GET['search_data_product'])){
-      $search_data_value = $_GET['search_data'];
-    
-      $select_product = "SELECT `product_id`, `product_title`, `product_description`, `product_keywords`, `category_id`, `brand_id`, `img_1`, `img_2`, `img_3`, `product_price`, `date`, `product_status` FROM `product` WHERE `product_keywords` LIKE '%$search_data_value%'";
-   
-      $sql_query = mysqli_query($con, $select_product);
-     
-      while ($result = mysqli_fetch_assoc($sql_query)) {
-        $product_id = $result["product_id"];
-        $product_title = $result["product_title"];
-        $product_description = $result["product_description"];
-        $product_keywords = $result["product_keywords"];
-        $category_id = $result["category_id"];
-        $brand_id = $result["brand_id"];
-        $img_1 = $result["img_1"];
-        $img_2 = $result["img_2"];
-        $img_3 = $result["img_3"];
-        $dt = $result["date"];
-        $status = $result["product_status"];
-    ?>
-        <div class="col-md-4 mb-2">
-          <div class="card">
-            <img src="admin/product_images/<?= $img_1 ?>" class="card-img-top" alt="foto">
-            <div class="card-body">
-              <h5 class="card-title"><?= $product_title ?></h5>
-              <p class="card-text"><?= $product_title ?></p>
-              <p class="card-text"><?= $product_description ?></p>
-              <a href="#" class="btn btn-info">В корзину</a>
-              <a href="#" class="btn btn-secondary">Смотреть еще</a>
-            </div>
+    $search_data_value = $_GET['search_data'];
+
+    $select_product = "SELECT `product_id`, `product_title`, `product_description`, `product_keywords`, `category_id`, `brand_id`, `img_1`, `img_2`, `img_3`, `product_price`, `date`, `product_status` FROM `product` WHERE `product_keywords` LIKE '%$search_data_value%'";
+
+    $sql_query = mysqli_query($con, $select_product);
+    $num_rows = mysqli_num_rows($sql_query);
+    if ($num_rows == 0) {
+      echo "<h1 class='danger'> Нет такого товара в нашем магазине!</h1>";
+    }
+    while ($result = mysqli_fetch_assoc($sql_query)) {
+      $product_id = $result["product_id"];
+      $product_title = $result["product_title"];
+      $product_description = $result["product_description"];
+      $product_keywords = $result["product_keywords"];
+      $category_id = $result["category_id"];
+      $brand_id = $result["brand_id"];
+      $img_1 = $result["img_1"];
+      $img_2 = $result["img_2"];
+      $img_3 = $result["img_3"];
+      $dt = $result["date"];
+      $status = $result["product_status"];
+      ?>
+      <div class="col-md-4 mb-2">
+        <div class="card">
+          <img src="admin/product_images/<?= $img_1 ?>" class="card-img-top" alt="foto">
+          <div class="card-body">
+            <h5 class="card-title"><?= $product_title ?></h5>
+            <p class="card-text"><?= $product_title ?></p>
+            <p class="card-text"><?= $product_description ?></p>
+            <a href="index.php?add_to_cart=<?= $product_id ?>" class="btn btn-info">В корзину</a>
+            <a href="product_detail.php?product_id=<?= $product_id ?>" class="btn btn-secondary">Смотреть еще</a>
           </div>
         </div>
+      </div>
       <?
+    }
+  }
+}
+function viewDelail()
+{
+  if (isset($_GET['product_id'])) {
+    if (!isset($_GET['category'])) {
+      if (!isset($_GET['brand'])) {
+        global $con;
+        $id_product = $_GET['product_id'];
+
+        $select_product = "SELECT `product_id`, `product_title`, `product_description`, `product_keywords`, `category_id`, `brand_id`, `img_1`, `img_2`, `img_3`, `product_price`, `date`, `product_status` FROM `product` WHERE `product_id` = '$id_product'";
+
+        $sql_query = mysqli_query($con, $select_product);
+        $num_rows = mysqli_num_rows($sql_query);
+        if ($num_rows == 0) {
+          echo "<h1 class='danger'> Нет такого товара в нашем магазине!</h1>";
+        }
+        while ($result = mysqli_fetch_assoc($sql_query)) {
+          $product_id = $result["product_id"];
+          $product_title = $result["product_title"];
+          $product_description = $result["product_description"];
+          $product_keywords = $result["product_keywords"];
+          $category_id = $result["category_id"];
+          $brand_id = $result["brand_id"];
+          $img_1 = $result["img_1"];
+          $img_2 = $result["img_2"];
+          $img_3 = $result["img_3"];
+          $dt = $result["date"];
+          $status = $result["product_status"];
+      ?>
+          <div class="col-md-4">
+            <div class="card">
+              <img src="admin/product_images/<?= $img_1 ?>" class="card-img-top" alt="foto">
+              <div class="card-body">
+                <h5 class="card-title"><?= $product_title ?></h5>
+                <p class="card-text"><?= $product_title ?></p>
+                <p class="card-text"><?= $product_description ?></p>
+                <a href="index.php?add_to_cart=<?= $product_id ?>" class="btn btn-info">В корзину</a>
+                <a href="product_detail.php?product_id=<?= $product_id ?>" class="btn btn-secondary">Смотреть еще</a>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-8">
+            <div class="row">
+              <div class="col-md-12">
+                <h4 class="text-center text-info mb-5">Related Products</h4>
+              </div>
+
+              <div class="col-md-6">
+                <img src="admin/product_images/<?= $img_2 ?>" class="card-img-top" alt="foto">
+
+              </div>
+
+              <div class="col-md-6">
+                <img src="admin/product_images/<?= $img_3 ?>" class="card-img-top" alt="foto">
+
+              </div>
+            </div>
+
+          </div>
+<?
+        }
       }
     }
+  }
+}
+//начало------ получение IP пользователя----------------------------------
+//============================================================
+function getUserIP()
+{
 
+  if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
+
+    $userIP = $_SERVER['HTTP_CLIENT_IP'];
+  } elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
+
+    $userIP = $_SERVER['HTTP_X_FORWARDED_FOR'];
+  } else {
+
+    $userIP = $_SERVER['REMOTE_ADDR'];
+  }
+
+  return $userIP;
+}
+
+// конец-------получение IP пользователя----------------------------------
+//============================================================
+
+// данные из корзины добавленные в базу данных
+function cart()
+{
+  if (isset($_GET['add_to_cart'])) {
+    global $con;
+    $id_product = $_GET['add_to_cart'];
+    $user_IP = getUserIP();
+
+    $select_cart = "SELECT `product_id`, `ip_adress`, `quantity` FROM `cart_detail` WHERE product_id='$id_product' AND ip_adress='$user_IP'";
+    $sql_query = mysqli_query($con, $select_cart);
+    $num_rows = mysqli_num_rows($sql_query);
+    if ($num_rows > 0) {
+      echo "<script>alert('Такой товар уже есть в Вашей корзине')</script>";
+      echo "<script>window.open('index.php','_self')</script>";
+    } else {
+      $insert_query = "INSERT INTO `cart_detail`(`product_id`, `ip_adress`, `quantity`) VALUES ('$id_product','$user_IP','0')";
+      mysqli_query($con, $insert_query);
+      echo "<script>alert(' Товар добавлен в Вашу корзину')</script>";
+      echo "<script>window.open('index.php','_self')</script>";
     }
+  }
+}
+// отображение корзины
+function num_item_cart()
+{
+  if (isset($_GET['add_to_cart'])) {
+    global $con;
+    $userIP = getUserIP();
+    $select_cart = "SELECT `ip_adress` FROM `cart_detail` WHERE ip_adress='$userIP'";
+    $sql_query = mysqli_query($con, $select_cart);
+    $count_cart_items = mysqli_num_rows($sql_query);
+   } else {
+    global $con;
+    $userIP = getUserIP();
+    $select_cart = "SELECT `ip_adress` FROM `cart_detail` WHERE ip_adress='$userIP'";
+    $sql_query = mysqli_query($con, $select_cart);
+    $count_cart_items = mysqli_num_rows($sql_query);
+    }
+    echo $count_cart_items;
+  }
+

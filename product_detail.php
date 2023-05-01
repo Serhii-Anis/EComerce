@@ -45,7 +45,7 @@ include 'fnctions/common_function.php';
               <a class="nav-link" href="#">Контакты</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="add_to_cart.php"><i class="fa-solid fa-cart-shopping"></i><sup><?num_item_cart()?></sup></a>
+              <a class="nav-link" href="#"><i class="fa-solid fa-cart-shopping"></i><sup>1</sup></a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="#">Общая цена: 100/~</a>
@@ -60,7 +60,6 @@ include 'fnctions/common_function.php';
       </div>
     </nav>
     <!-- navbarContainer -->
-    <?cart();?>
     <!-- вторая секция -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-secondary">
       <ul class="navbar-nav me-auto">
@@ -86,11 +85,11 @@ include 'fnctions/common_function.php';
       <div class="col-md-10">
         <!-- продукты -->
         <div class="row">
+
           <?php
-          getProducts();
+          viewDelail();
           getUniqueCategory();
           getUniqueBrand();
-        
           ?>
         </div>
         <!-- продукты -->
@@ -124,7 +123,7 @@ include 'fnctions/common_function.php';
         <!-- сайд бар -->
       </div>
       <!-- секция третья -->
-      <?cart()?>
+
       <!-- footer content -->
       <?include 'footer.php'?>
       <!-- footer content -->

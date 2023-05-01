@@ -1,4 +1,7 @@
 <?php
+
+?>
+<?php
 include 'fnctions/common_function.php';
 ?>
 <!DOCTYPE html>
@@ -45,7 +48,7 @@ include 'fnctions/common_function.php';
               <a class="nav-link" href="#">Контакты</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="add_to_cart.php"><i class="fa-solid fa-cart-shopping"></i><sup><?num_item_cart()?></sup></a>
+              <a class="nav-link" href="add_to_cart.php"><i class="fa-solid fa-cart-shopping"></i><sup>1</sup></a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="#">Общая цена: 100/~</a>
@@ -76,55 +79,14 @@ include 'fnctions/common_function.php';
 
     <!-- Заголовок -->
     <div class="bg-light">
-      <h3 class="text-center">Магазин </h3>
-      <p class="text-center">Совершайте покупки у нас</p>
+      <h3 class="text-center">Ваша Корзина</h3>
+      <p class="text-center">Мы благодарим Вас за Ваши покупки</p>
     </div>
     <!-- Заголовок -->
 
     <!-- секция третья -->
     <div class="row">
-      <div class="col-md-10">
-        <!-- продукты -->
-        <div class="row">
-          <?php
-          getProducts();
-          getUniqueCategory();
-          getUniqueBrand();
-        
-          ?>
-        </div>
-        <!-- продукты -->
-      </div>
-      <div class="col-md-2 bg-secondary p-0">
-        <!-- сайд бар -->
-        <!-- Показ бренда -->
-        <ul class="navbar-nav me-auto text-center">
-          <li class="nav-item bg-info">
-            <a href="#" class="nav-link text-light">
-              <h4>Бренды и марки</h4>
-            </a>
-          </li>
-          <?php
-          getBrands();
-          ?>
-        </ul>
-        <!-- Показ бренда -->
-        <!-- Показ категории -->
-        <ul class="navbar-nav me-auto text-center">
-          <li class="nav-item bg-info">
-            <a href="#" class="nav-link text-light">
-              <h4>Категория</h4>
-            </a>
-          </li>
-          <?php
-          getCategories();
-          ?>
-        </ul>
-        <!-- Показ категории -->
-        <!-- сайд бар -->
-      </div>
-      <!-- секция третья -->
-      <?cart()?>
+    
       <!-- footer content -->
       <?include 'footer.php'?>
       <!-- footer content -->
