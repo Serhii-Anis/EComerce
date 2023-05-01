@@ -52,7 +52,7 @@ include 'fnctions/common_function.php';
             </li>
 
           </ul>
-          <form action="search_product.php" method="GET"class="d-flex">
+          <form action="" method="GET"class="d-flex">
             <input name="search_data"class="form-control me-2" type="search" placeholder="Поиск" aria-label="Search">
             <input name="search_data_product"class="btn btn-outline-light" type="submit"value="Search">
           </form>
@@ -86,7 +86,7 @@ include 'fnctions/common_function.php';
         <!-- продукты -->
         <div class="row">
           <?php
-          getProducts();
+          searchProduct();
           getUniqueCategory();
           getUniqueBrand();
           ?>
