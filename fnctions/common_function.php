@@ -16,6 +16,7 @@ function getProducts()
         $product_id = $result["product_id"];
         $product_title = $result["product_title"];
         $product_description = $result["product_description"];
+        $product_price = $result['product_price'];
         $product_keywords = $result["product_keywords"];
         $category_id = $result["category_id"];
         $brand_id = $result["brand_id"];
@@ -32,6 +33,7 @@ function getProducts()
               <h5 class="card-title"><?= $product_title ?></h5>
               <p class="card-text"><?= $product_title ?></p>
               <p class="card-text"><?= $product_description ?></p>
+              <p class="card-text">Цена:<?= $product_price ?>/~</p>
               <a href="index.php?add_to_cart=<?= $product_id ?>" class="btn btn-info">В корзину</a>
               <a href="product_detail.php?product_id=<?= $product_id ?>" class="btn btn-secondary">Смотреть еще</a>
             </div>
@@ -98,6 +100,7 @@ function getUniqueCategory()
       $product_id = $result["product_id"];
       $product_title = $result["product_title"];
       $product_description = $result["product_description"];
+      $product_price = $result['product_price'];
       $product_keywords = $result["product_keywords"];
       $category_id = $result["category_id"];
       $brand_id = $result["brand_id"];
@@ -114,6 +117,7 @@ function getUniqueCategory()
             <h5 class="card-title"><?= $product_title ?></h5>
             <p class="card-text"><?= $product_title ?></p>
             <p class="card-text"><?= $product_description ?></p>
+            <p class="card-text">Цена:<?= $product_price ?>/~</p>
             <a href="index.php?add_to_cart=<?= $product_id ?>" class="btn btn-info">В корзину</a>
             <a href="product_detail.php?product_id=<?= $product_id ?>" class="btn btn-secondary">Смотреть еще</a>
           </div>
@@ -143,6 +147,7 @@ function getUniqueBrand()
       $product_id = $result["product_id"];
       $product_title = $result["product_title"];
       $product_description = $result["product_description"];
+      $product_price = $result['product_price'];
       $product_keywords = $result["product_keywords"];
       $category_id = $result["category_id"];
       $brand_id = $result["brand_id"];
@@ -159,6 +164,8 @@ function getUniqueBrand()
             <h5 class="card-title"><?= $product_title ?></h5>
             <p class="card-text"><?= $product_title ?></p>
             <p class="card-text"><?= $product_description ?></p>
+            <p class="card-text">Цена:<?= $product_price ?>/~</p>
+
             <a href="index.php?add_to_cart=<?= $product_id ?>" class="btn btn-info">В корзину</a>
             <a href="product_detail.php?product_id=<?= $product_id ?>" class="btn btn-secondary">Смотреть еще</a>
           </div>
@@ -182,6 +189,7 @@ function getAllProducts()
         $product_id = $result["product_id"];
         $product_title = $result["product_title"];
         $product_description = $result["product_description"];
+        $product_price = $result['product_price'];
         $product_keywords = $result["product_keywords"];
         $category_id = $result["category_id"];
         $brand_id = $result["brand_id"];
@@ -198,6 +206,8 @@ function getAllProducts()
               <h5 class="card-title"><?= $product_title ?></h5>
               <p class="card-text"><?= $product_title ?></p>
               <p class="card-text"><?= $product_description ?></p>
+              <p class="card-text">Цена:<?= $product_price ?>/~</p>
+
               <a href="index.php?add_to_cart=<?= $product_id ?>" class="btn btn-info">В корзину</a>
               <a href="product_detail.php?product_id=<?= $product_id ?>" class="btn btn-secondary">Смотреть еще</a>
             </div>
@@ -227,6 +237,7 @@ function searchProduct()
       $product_id = $result["product_id"];
       $product_title = $result["product_title"];
       $product_description = $result["product_description"];
+      $product_price = $result['product_price'];
       $product_keywords = $result["product_keywords"];
       $category_id = $result["category_id"];
       $brand_id = $result["brand_id"];
@@ -243,6 +254,8 @@ function searchProduct()
             <h5 class="card-title"><?= $product_title ?></h5>
             <p class="card-text"><?= $product_title ?></p>
             <p class="card-text"><?= $product_description ?></p>
+            <p class="card-text">Цена:<?= $product_price ?>/~</p>
+
             <a href="index.php?add_to_cart=<?= $product_id ?>" class="btn btn-info">В корзину</a>
             <a href="product_detail.php?product_id=<?= $product_id ?>" class="btn btn-secondary">Смотреть еще</a>
           </div>
@@ -271,6 +284,7 @@ function viewDelail()
           $product_id = $result["product_id"];
           $product_title = $result["product_title"];
           $product_description = $result["product_description"];
+          $product_price = $result['product_price'];
           $product_keywords = $result["product_keywords"];
           $category_id = $result["category_id"];
           $brand_id = $result["brand_id"];
@@ -287,6 +301,8 @@ function viewDelail()
                 <h5 class="card-title"><?= $product_title ?></h5>
                 <p class="card-text"><?= $product_title ?></p>
                 <p class="card-text"><?= $product_description ?></p>
+                <p class="card-text">Цена:<?= $product_price ?>/~</p>
+
                 <a href="index.php?add_to_cart=<?= $product_id ?>" class="btn btn-info">В корзину</a>
                 <a href="product_detail.php?product_id=<?= $product_id ?>" class="btn btn-secondary">Смотреть еще</a>
               </div>
@@ -369,13 +385,35 @@ function num_item_cart()
     $select_cart = "SELECT `ip_adress` FROM `cart_detail` WHERE ip_adress='$userIP'";
     $sql_query = mysqli_query($con, $select_cart);
     $count_cart_items = mysqli_num_rows($sql_query);
-   } else {
+  } else {
     global $con;
     $userIP = getUserIP();
     $select_cart = "SELECT `ip_adress` FROM `cart_detail` WHERE ip_adress='$userIP'";
     $sql_query = mysqli_query($con, $select_cart);
     $count_cart_items = mysqli_num_rows($sql_query);
-    }
-    echo $count_cart_items;
   }
+  echo $count_cart_items;
+}
 
+// вывод общей цены товара
+function getTotal_price()
+{
+  global $con;
+  $get_ip = getUserIP();
+  $total = 0;
+  $cart_query="SELECT * FROM `cart_detail` WHERE `ip_adress`='$get_ip'";
+ 
+  $result = mysqli_query($con,$cart_query);
+
+  while($row = mysqli_fetch_array($result)){
+    $product_id = $row['product_id'];
+    $select_product = "SELECT * FROM `product` where `product_id`='$product_id'";
+    $result_product = mysqli_query($con,$select_product);
+    while($row_product_price =mysqli_fetch_array($result_product)){
+$product_price =array($row_product_price['product_price']);
+$product_value=array_sum($product_price);
+$total+=$product_value;
+    }
+  }
+echo $total;
+}

@@ -48,7 +48,7 @@ include 'fnctions/common_function.php';
               <a class="nav-link" href="add_to_cart.php"><i class="fa-solid fa-cart-shopping"></i><sup><?num_item_cart()?></sup></a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Общая цена: 100/~</a>
+              <a class="nav-link" href="#">Общая цена: <?getTotal_price()?>/~</a>
             </li>
 
           </ul>

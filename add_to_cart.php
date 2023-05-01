@@ -1,4 +1,7 @@
 <?php
+echo"<pre>";
+var_dump($_SERVER);
+echo"</pre>";
 
 ?>
 <?php
@@ -86,7 +89,7 @@ include 'fnctions/common_function.php';
 
     <!-- секция третья -->
     <div class="row">
-    
+  
       <!-- footer content -->
       <?include 'footer.php'?>
       <!-- footer content -->
